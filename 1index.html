@@ -1,18 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/loader.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style/loader.css">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  
-    <title>App Rick & Morty</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	
+	<title>App Rick & Morty</title>
 </head>
-<body>
 
-    <script src="https://kit.fontawesome.com/e010b89ab9.js" crossorigin="anonymous"></script>
-    <script type="module" src="./2features.js"></script>
+<body>
+  <!-- *************************************** HEADER *************************************** -->
+	<header>
+		<h1>RICK & MORTY</h1>
+	</header>
+
+	<main>
+    <!-- *************************************** HERO *************************************** -->
+		<section>
+      <div class="bg-blue-500 h-64">AQUÍ HERO</div>
+		</section>
+
+    <!-- ******************************** COMPONENTS FILTERS ******************************** -->
+    <section id="components-filters" class="bg-green-500 text-2xl flex flex-col " >
+
+				<div class="ml-5">
+					<label for="text-search">Búsqueda</label>
+					<input id="text-search" type="text" name="text-search" placeholder="Ingresa tu búsqueda" class=" h-10 bg-[#1b4d96] text-2xl text-white lg:w-[90%] lg:text-1xl "  >
+				</div>
+				
+				<!--___________ TYPE  ___________ -->
+				<div id="wrapper-select-type" class="p-2 ml-8"  >
+					<label  for="select-type">Tipo</label>
+					<select id="input-select-type" class=" bg-[#1b4d96] text-[#d0e845]  mt-2" name="select-type" >
+						<option value="character">Personajes</option>
+						<option value="episode">Episodios</option>
+					</select>
+				</div>
+				
+				<!--___________  STATUS ___________ -->
+				<div id="wrapper-select-status" class=" p-2 m-auto">
+					<label for="select-status">Estado</label>
+					<select id="select-status" name="select-status" class=" bg-[#1b4d96] text-[#d0e845] mt-2" >
+						<option value="all">Todos</option> 
+						<option value="alive">Vivo</option> 
+						<option value="dead">Muerto</option>
+						<option value="unknown">Desconocido</option>
+					</select>
+				</div>
+				
+				<!--___________  GENDER ___________ -->
+				<div id="wrapper-select-gender" class="p-2 m-auto">
+					<label for="select-gender">Género</label>
+					<select id="select-gender" name="select-gender" class=" bg-[#1b4d96] text-[#d0e845] mt-2" >
+						<option value="all">Todos</option>
+						<option value="female">Femenino</option>
+						<option value="male">Masculino</option>
+						<option value="genderless">Sin Género</option>
+						<option value="unknown">Desconocido</option>
+					</select>
+				</div>
+				
+					<button id="button-search" class="w-[30%] m-auto bg-green-500 rounded-xl border border-black text-xl p-1 mt-5 mb-6 lg:w-[20%]" type="button">Buscar</button>
+		</section>
+
+	</main>
+
+	<script src="https://kit.fontawesome.com/e010b89ab9.js" crossorigin="anonymous"></script>
+	<script type="module" src="./2features.js"></script>
 </body>
 </html>

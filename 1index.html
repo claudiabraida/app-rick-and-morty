@@ -13,62 +13,148 @@
 
 <body>
   <!-- *************************************** HEADER *************************************** -->
-	<header>
-		<h1>RICK & MORTY</h1>
-	</header>
+	<header class="bg-pink-200">
+    <img src="" alt="logo de la aplicación">
+    <h1>RICK & MORTY</h1>
+  </header>
 
-	<main>
+	<main class="bg-[#040a2d] flex flex-col items-center" >
     <!-- *************************************** HERO *************************************** -->
-		<section>
+		<section class="w-full">
       <div class="bg-blue-500 h-64">AQUÍ HERO</div>
-		</section>
+      <h1>ADA COMICS</h1>
+    </section>
 
     <!-- ******************************** COMPONENTS FILTERS ******************************** -->
-    <section id="components-filters" class="bg-green-500 text-2xl flex flex-col " >
+    <section id="components-filters"  class="text-2xl flex flex-col md:w-full md:flex md:flex-col md:justify-between text-red-100" >
+      <!--___________ SEARCH  ___________ -->
+			<div class="p-5 flex flex-col">
+				<label class="md:text-2xl" for="text-search">Búsqueda</label>
+				<input id="text-search" type="text" name="text-search" placeholder="Ingresa tu búsqueda" class=" h-10 bg-[#1b4d96] text-2xl text-white lg:w-[90%] lg:text-1xl md:h-14 md:text-3xl md:border md:rounded-xl mt-2 "  >
+			</div>
 
-				<div class="ml-5">
-					<label for="text-search">Búsqueda</label>
-					<input id="text-search" type="text" name="text-search" placeholder="Ingresa tu búsqueda" class=" h-10 bg-[#1b4d96] text-2xl text-white lg:w-[90%] lg:text-1xl "  >
-				</div>
-				
-				<!--___________ TYPE  ___________ -->
-				<div id="wrapper-select-type" class="p-2 ml-8"  >
-					<label  for="select-type">Tipo</label>
-					<select id="input-select-type" class=" bg-[#1b4d96] text-[#d0e845]  mt-2" name="select-type" >
-						<option value="character">Personajes</option>
-						<option value="episode">Episodios</option>
-					</select>
-				</div>
+      <!--___________ TYPE  ___________ -->
+      <div class="p-5 flex flex-col"  id="wrapper-select-type">
+        <label class="md:text-2xl" for="select-type">Tipo</label>
+        <select name="select-type"class="w-full bg-[#1b4d96] text-[#d0e845] md:h-12 md:text-3xl md:border md:rounded-xl mt-2" id="input-select-type">
+          <option value="character">Personajes</option>
+          <option value="episode">Episodios</option>
+        </select>
+      </div>
+
+      <div class="wrapper-filters -mt-5 p-6 md:flex md:justify-around md:gap-3">
 				
 				<!--___________  STATUS ___________ -->
-				<div id="wrapper-select-status" class=" p-2 m-auto">
-					<label for="select-status">Estado</label>
-					<select id="select-status" name="select-status" class=" bg-[#1b4d96] text-[#d0e845] mt-2" >
-						<option value="all">Todos</option> 
-						<option value="alive">Vivo</option> 
+				<div id="wrapper-select-status">
+					<label class="text-1xl md:text-2xl" for="select-status">Estado</label>
+					<select name="select-status" class="w-full bg-[#1b4d96] text-[#d0e845] mt-3 md:text-3xl md:border md:rounded-xl mt-2" id="select-status">
+						<option value="all">Todos</option>
+						<option value="alive">Vivo</option>
 						<option value="dead">Muerto</option>
 						<option value="unknown">Desconocido</option>
 					</select>
 				</div>
-				
+
 				<!--___________  GENDER ___________ -->
-				<div id="wrapper-select-gender" class="p-2 m-auto">
-					<label for="select-gender">Género</label>
-					<select id="select-gender" name="select-gender" class=" bg-[#1b4d96] text-[#d0e845] mt-2" >
+        <div id="wrapper-select-gender" class="mt-5">
+					<label class="text-1xl:text-2xl" for="select-gender">Género</label>
+          <select name="select-gender" class="w-full bg-[#1b4d96] text-[#d0e845] mt-3 md:text-3xl md:border md:rounded-xl md:mt-2" id="select-gender">
 						<option value="all">Todos</option>
-						<option value="female">Femenino</option>
-						<option value="male">Masculino</option>
+						<option value="female">Mujeres</option>
+						<option value="male">Hombres</option>
 						<option value="genderless">Sin Género</option>
 						<option value="unknown">Desconocido</option>
-					</select>
+          </select>
 				</div>
-				
-					<button id="button-search" class="w-[30%] m-auto bg-green-500 rounded-xl border border-black text-xl p-1 mt-5 mb-6 lg:w-[20%]" type="button">Buscar</button>
+			</div>
+
+			<div class="wrapper-button-search text-center ">
+				<button id="button-search" class="w-[40%] bg-green-500 rounded-xl border border-black text-xl p-2 lg:w-[20%] md:w-[25%] md:h-[69px] md:text-3xl" type="button">Buscar</button>
+      </div>
+
 		</section>
 
+    <!-- ********************************* COMPONENT SEARCH ********************************* -->
+    <section id="component-search-images" class=""></section>
+
+    <!-- ********************************* COMPONENT SEARCH EPISODE ********************************* -->
+    <section id="component-search-episode" class=" w-[90%] min-h-72 flex flex-col items-center gap-20 bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14
+    md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around"></section>
+    
+    <!-- ********************************* COMPONENT FILTER STATUS ********************************* -->
+    <section id="component-filter-status" class=" w-[90%] min-h-72 flex flex-col items-center bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14
+        md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+
+    </section>
+
+    <!-- ********************************* COMPONENT FILTER GENDER ********************************* -->
+     <section id="component-filter-gender" class=" w-[90%] min-h-72 flex flex-col items-center bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14
+        md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+
+    </section>
+
+    <!-- ********************************* COMPONENT CHARACTERS ********************************* -->
+    <section id="component-images" class="w-[90%] min-h-72 flex flex-col items-center gap-20 bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14
+     md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+
+    </section>
+
+		<!-- ********************************* COMPONENT EPISODES ********************************* -->
+		<section id="component-episodes" class="hidden w-[90%] min-h-72 flex flex-col items-center bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14
+		 md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+     <!-- <div id="wrapper" class="hidden "></div> -->
+    </section>
+
+		<!-- ********************************* COMPONENT DETAIL EPISODE ********************************* -->
+		<section id="component-episode-detail" class="hidden w-[90%] min-h-72  flex flex-col">
+			<div id="wrapper-episode-detail" class="w-[90%] min-h-72 m-auto bg-orange-600">MMMMMMMMMMMMMMM</div>
+			<div id="view-episode-detail" class="hidden"></div>
+			<button  class ="button-back-episode text-white bg-pink-600 ">VOLVER</button>
+
+		</section>
+		
+		<!-- ********************************* COMPONENT DETAIL CHARACTER ********************************* -->
+		<section id="component-character-detail" class="hidden w-[90%] min-h-72 flex flex-col md:flex md:flex-col m-auto">
+			<div id="wrapper-character-detail" class=""></div>
+			<div id="view-character-detail" class="w-full  bg-pink-700" ></div>
+		
+			<button class ="button-back-character text-white w-[30%] h-10 m-auto rounded-lg bg-blue-600">VOLVER</button>
+		</section>
+
+    <!-- ********************************* COMPONENT PAGINATION ********************************* -->
+    <section id="component-pagination">
+      <!--___________ page-number ___________ -->
+      <h1 class="text-white" id="page-number">1</h1>
+      
+			<!--___________ buttons/prev-next ___________ -->
+      <button id="button-prev" class=" bg-green-500 rounded-xl border border-black md:w-28 md:h-12 md:text-xl" type="button">Anterior</button>
+      <button id="button-next" class=" bg-green-500 rounded-xl border border-black md:w-28 md:h-12 md:text-xl" type="button">Siguiente</button>
+
+		</section>
 	</main>
+		
+		<!-- ************************************ FOOTER *********************************** -->
+		<footer class="bg-black text-white flex flex-col items-center p-5 leading-8">
+			
+			<!-- ........SOCIAL CONTACT............ -->
+			<div class="footer-social-contact text-center">
+				<a href="https://www.linkedin.com/"><i class="social fa-brands fa-linkedin"></i></a>
+				<a href="https://github.com/"><i class="social fa-brands fa-github"></i></a>
+				<a href="https://www.facebook.com/"><i class="social fa-brands fa-square-facebook"></i></a>
+				<a href="https://discord.com/"><i class="social fa-brands fa-discord"></i></a>
+			</div>
+			
+			<!-- ........COPYRIGTH............ -->
+			<div class="footer-copyright text-center">
+				<p class="paragraph-copyrigth">Hecho con <i class="fa-solid fa-heart"></i> por Claudia Braida</p>
+				<p class="text-copyright"> Copyright © 2025 Braida</p>
+			</div>
+		</footer>
+
+		<script src="https://kit.fontawesome.com/e010b89ab9.js" crossorigin="anonymous"></script>
+		<script type="module" src="./3main.js"></script>
 
 	<script src="https://kit.fontawesome.com/e010b89ab9.js" crossorigin="anonymous"></script>
-	<script type="module" src="./2features.js"></script>
+	<script type="module" src="./3main.js"></script>
 </body>
 </html>

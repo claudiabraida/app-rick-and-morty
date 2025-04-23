@@ -1,213 +1,189 @@
-import {
-  dataApi, getData,
+/* ************************ MAIN DATA CHARACTERS ************************ */
 
-  pageApi, getPrevPageData, getNextPageData,
+/* 💛💛💛💛💛💛💛💛💛💛💛💛 GET CHARACTERS 💛💛💛💛💛💛💛💛💛💛💛 */
+let dataCharacter = []
+let pageApi = 1
+let pageMaxApi = 0
 
-  getEpisode,dataEpisode, pageEpisode,
+async function getCharacters (page) {
 
-  getCharacterDetail, promisesCharacters, objCharacterDetail,
-
-  getSearchCharacters, characterSearch,
-
-  objEpisodeDetail, promisesEpisodes, getEpisodeDetail,
-  filterStatus,
-  getStatusCharacters,
-
-  getGenderCharacters,
-  filterGender,
-  
-} from "./1features.js";
-
-
-/* ----------📌📌📌📌📌 GENERAL SELECTORS 📌📌📌📌📌---------- */
-const $ = element => document.querySelector(element);
-const $$ = element => document.querySelectorAll(element);
-
-const hideElement = (selectors) => {
-  for (const selector of selectors) {
-    selector.classList.add("hidden");
-  }
-};
-
-const showElement = (selectors) => {
-  for (const selector of selectors) {
-    selector.classList.remove("hidden");
-  }
-};
-
-const showAndHideElement = (selectors) => {
-  for (const selector of selectors) {
-    selector.classList.toggle("hidden");
-  }
-};
-
-
-/* --------🎲🎲🎲🎲🎲 HTML ELEMENT VARIABLES 🎲🎲🎲🎲🎲-------- */
-const $inputSelectType = $("#input-select-type");
-const $selectStatus = $("#select-status");
-const $selectGender = $("#select-gender");
-
-const $componentFilterStatus = $("#component-filter-status");
-const $componentFilterGender = $("#component-filter-gender");
-
-/* ________ component Images / Details ________ */
-const $componentImages = $("#component-images");
-const $componentEpisodes = $("#component-episodes");
-
-const $componentCharacterDetail = $("#component-character-detail");
-const $wrapperCharacterDetail = $("#wrapper-character-detail");
-const $buttonBackCharacter = $(".button-back-character");
-
-const $componentEpisodeDetail = $("#component-episode-detail");
-const $wrapperEpisodeDetail = $("#wrapper-episode-detail");
-const $componentSearchImages = $("#component-search-images");
-
-
-/* ________ component button Search ________ */
-const $buttonSearch = $("#button-search");
-const $inputTextSearch = $("#text-search");
-
-/* ________ component button pagination ________ */
-const $buttonPrev = $("#button-prev");
-const $buttonNext = $("#button-next");
-
-
-let dataApi = []
-let episodes = []
-let pageInitial = 1
-let pageMax = 0
-
-
-
-
-async function getCharacters () {
-try {
-  console.log("getCharacters")
-  const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${pageInitial}`)
-  pageMax = data.info.pages
-  dataApi = data.results
-  // console.log(data)
-} catch (error) {
-  console.log(error)
-  
-}
-
-}
-
-
-async function getEpisode () {
   try {
-    console.log("EPISODIOS")
-    const {data} = await axios(`https://rickandmortyapi.com/api/episode?page=${pageInitial}`)
-    pageMax = data.info.pages
-    dataApi = data.results
-    // console.log(data)
+   const {data} = await axios(`https://rickandmortyapi.com/api/character?page=${page}`)
+   dataCharacter = data.results 
+   pageMaxApi = data.info.pages
+   console.log(pageMaxApi)
+
   } catch (error) {
     console.log(error)
-    
   }
-  
-  }
-/* 💚💚💚💚💚💚💚💚💚💚💚💚 PREV PAGE💚💚💚💚💚💚💚💚💚💚💚💚 */
-async function getPrevPage() {
-  
-  if(pageInitial != 1) {
-    pageInitial -= 1
-  }
-  await getCharacters(pageInitial)
-
-  // if(pageEpisode != 1) {
-  //   pageEpisode -= 1
-  // }
-  // await getEpisode(pageEpisode)
-  
-  console.log(pageInitial)
-
 }
 
-/* 💚💚💚💚💚💚💚💚💚💚💚💚 NEXT PAGE 💚💚💚💚💚💚💚💚💚💚💚💚 */
-async function getNextPage() {
-  
-  if(pageInitial < pageMax && pageInitial >= 1 ) {
-    pageInitial += 1
-  }
-  
-  // if(pageEpisode < pageMaxEpisode && pageEpisode >= 1 ) {
-  //   pageEpisode += 1
-  // }
-  // await getEpisode(pageEpisode)
+/* 💛💛💛💛💛💛💛💛💛💛💛💛 GET EPISODIES 💛💛💛💛💛💛💛💛💛💛💛 */
+let dataEpisode = []
+let pageEpisode = 1
+let pageMaxEpisode = 0
 
-  await getCharacters(pageInitial)
-  console.log(pageInitial)
+async function getEpisodes (page) {
+
+  try {
+   const {data} = await axios(`https://rickandmortyapi.com/api/episode?page=${page}`)
+    dataEpisode = data.results
+    pageMaxEpisode = data.info.pages
+
+    // console.log(pageMaxEpisode)
+    // console.log(dataEpisode)
+
+  } catch (error) {
+    console.log(error)
+  }
 }
-
-
-/* ******************************** COMPONENTS FILTERS TYPE ******************************** */
-// function selectType () {}
-$inputSelectType.addEventListener("input", async (e)=> {
-  $componentEpisodes.innerHTML = ""
-  $componentEpisodes.innerHTML = $inputSelectType.value
-  if(e.target.value === "episode" ) {
-   await getEpisode(pageEpisode)
-
-
-    displayEpisode(dataEpisode)
-    hideElement([$componentImages, $wrapperCharacterDetail]);
-    showElement([$componentEpisodes]);
-
-  } 
-  
-   else if(e.target.value === "character") {
-
-
-    await getData(pageApi)
-    hideElement([$componentEpisodes, $buttonBackCharacter]);
-    showElement([$componentImages]);
-    displayData(dataApi)
-  }
-
-
-})
+// getEpisode(dataEpisode)
 
 
 /* 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡  FILTER STATUS 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡 */
+let filterStatus = []
 
-function selectFilterStatus () {
-  $selectStatus.addEventListener("input", async () => {
-  $componentFilterStatus.innerHTML = $selectStatus.value
-  
-  await getStatusCharacters($selectStatus.value);
-  displayFilterStatusCharacters (filterStatus);
-
-  })
-}
-
-function displayFilterStatusCharacters (filtersCharaters){
-  $componentFilterStatus.innerHTML = ""
-  for(const filterCharacter of filtersCharaters) {
-    $componentFilterStatus.innerHTML += `
-
-    <div class=" wrapper-info-character w-[110%] min-h-[20rem] m-4 rounded-2xl bg-[#3a183e]
-      shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] text-white flex flex-col
-      md:w-[44%] lg:w-[20%] lg:min-h-[18rem] " >
-        <img src="${filterCharacter.image}" alt="imágenes de personajes por estado;vivo, muerto, etc"
-        class ="w-[90%] m-auto mt-6 rounded-full border  shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)]">
-        <p>${filterCharacter.status}</p>
-
-    </div>
-    `
+async function getStatusCharacters (status) {
+  try {
+   const {data} = await axios(`https://rickandmortyapi.com/api/character/?status=${status}`)
+   filterStatus = data.results
+   console.log(filterStatus)
+  //  console.log("ueeueue")
+  //  console.log(dataApi)
+  //  displayData(dataApi)
+  } catch (error) {
+    console.log(error)
   }
 }
 
-export {
-  /* ____ variables ____ */
-  pageInitial,
-  dataApi,
+/* 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡  FILTER GENDER 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡 */
+let filterGender = []
 
-  /* ____ functions ____ */
-  getCharacters,
-  getPrevPage,
-  getNextPage,
-
-    
+async function getGenderCharacters (gender) {
+  try {
+   const {data} = await axios(`https://rickandmortyapi.com/api/character/?gender=${gender}`)
+   filterGender = data.results
+   console.log(filterGender)
+  //  console.log("ueeueue")
+  //  console.log(dataApi)
+   //  displayData(dataApi)
+  } catch (error) {
+    console.log(error)
+  }
 }
+
+
+/* 💙💙💙💙💙💙💙💙💙💙 DATA SEARCH BY NAME CHARACTER 💙💙💙💙💙💙💙💙💙💙 */
+let characterSearch = {}
+
+async function getSearchCharacters (name) {
+  try {
+    const {data} = await axios(`https://rickandmortyapi.com/api/character/?name=${name}`);
+    characterSearch = data.results
+    console.log(characterSearch);
+
+  } catch (error) {
+    console.log(error)
+    
+  };
+
+}
+
+/* 💙💙💙💙💙💙💙💙💙💙 DATA SEARCH BY NAME EPISODE 💙💙💙💙💙💙💙💙💙💙 */
+
+let episodeSearch = {}
+
+async function getSearchEpisode (page) {
+  try {
+    const {data} = await axios(`https://rickandmortyapi.com/api/episode/?page=${page}`);
+    console.log(data)
+    episodeSearch = data.info.pages
+    
+    console.log(episodeSearch);
+
+  } catch (error) {
+    console.log(error)
+    
+  };
+
+}
+
+
+/* 💚💚💚💚💚💚💚💚💚💚💚  PAGINATION DATA PREV PAGE 💚💚💚💚💚💚💚💚💚 */
+async function getPrevPageData() {
+  
+  if(pageApi != 1) {
+    pageApi -= 1
+  }
+  await getCharacters(pageApi)
+
+  if(pageEpisode != 1) {
+    pageEpisode -= 1
+  }
+  await getEpisodes(pageEpisode)
+  
+  console.log(pageApi)
+
+}
+
+
+/* 💚💚💚💚💚💚💚💚💚💚  PAGINATION DATA  NEXT PAGE  💚💚💚💚💚💚💚💚💚💚 */
+async function getNextPageData() {
+  
+  if(pageApi < pageMaxApi && pageApi >= 1 ) {
+    pageApi += 1
+  }
+  
+  if(pageEpisode < pageMaxEpisode && pageEpisode >= 1 ) {
+    pageEpisode += 1
+  }
+
+  await getCharacters(pageApi)
+  await getEpisodes(pageEpisode)
+  console.log(pageApi)
+}
+
+
+getSearchEpisode(episodeSearch)
+/* ******************* EXPORT DATA  ******************* */
+
+export {
+  /* _______ characters data  _______ */
+   dataCharacter,
+   getCharacters,
+
+   
+ 
+  /* _______ episodes data  ______ */
+   getEpisodes,
+   dataEpisode,
+ 
+  /* _______ pages characters data  _______ */
+   pageApi,
+   pageMaxApi,
+ 
+   /* _______ pages episodes data  _______ */
+   pageMaxEpisode,
+   pageEpisode,
+ 
+   /* ______ status filters  _______ */
+   filterStatus,
+   getStatusCharacters,
+
+   /* ______ gender filters  _______ */
+   filterGender,
+   getGenderCharacters,
+   
+   /* ______ get search character  _______ */
+   characterSearch,
+   getSearchCharacters,
+
+   /* ______ get search episode  _______ */
+  //  episodeSearch,
+  //  getSearchEpisode,
+  
+   /* ______ get search episode  _______ */
+   getPrevPageData,
+   getNextPageData,
+  
+ }

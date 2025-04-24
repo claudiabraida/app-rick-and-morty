@@ -397,9 +397,9 @@ function displayDetailEpisode () {
       shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] text-white flex flex-col
       md:w-[44%] lg:w-[20%] lg:min-h-[18rem]">
 
-      <div id="${objEpisodeDetail.id}" class="luz w-full">
+      <div id="${objEpisodeDetail.id}" class=" w-full">
       <p>DISPLAY EPISODE DETAIL</p>
-        <p class="text-white text-1xl text-center m-2">AAAAAAAANombre: ${objEpisodeDetail.name}</p>
+        <p class="text-white text-1xl text-center m-2">Nombre: ${objEpisodeDetail.name}</p>
         <p class="text-white text-1xl text-center m-2">Fecha de emisión: ${objEpisodeDetail.air_date}</p>
         <p class="text-white text-1xl text-center m-2">Creado: ${objEpisodeDetail.created}</p>
         <p class="text-white text-1xl text-center m-2">Episodio: ${objEpisodeDetail.episode}</p>

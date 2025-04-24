@@ -1,18 +1,176 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/loader.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style/loader.css">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  
-    <title>App Rick & Morty</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	
+	<title>App Rick & Morty</title>
 </head>
-<body>
 
-    <script src="https://kit.fontawesome.com/e010b89ab9.js" crossorigin="anonymous"></script>
-    <script type="module" src="./2features.js"></script>
+<body>
+  <!-- *************************************** HEADER *************************************** -->
+	<header class="bg-pink-200">
+    <img src="" alt="logo de la aplicación">
+    <h1>RICK & MORTY</h1>
+  </header>
+
+	<main class="bg-[#040a2d] text-white flex flex-col items-center" >
+    <!-- *************************************** HERO *************************************** -->
+		<section class="w-full">
+      <div class="bg-blue-500 h-64">AQUÍ HERO</div>
+      <h1>ADA COMICS</h1>
+    </section>
+
+    <!-- ******************************** COMPONENTS FILTERS ******************************** -->
+    <section id="components-filters"  class="text-2xl flex flex-col md:w-full md:flex md:flex-col md:justify-between text-red-100" >
+      <!--___________ SEARCH  ___________ -->
+			<div class="p-5 flex flex-col">
+				<label class="md:text-2xl" for="text-search">Búsqueda</label>
+				<input id="text-search" type="text" name="text-search" placeholder="Ingresa tu búsqueda" class=" h-10 bg-[#1b4d96] text-2xl text-white lg:w-[90%] lg:text-1xl md:h-14 md:text-3xl md:border md:rounded-xl mt-2 "  >
+			</div>
+
+      <!--___________ TYPE  ___________ -->
+      <div class="p-5 flex flex-col"  id="wrapper-select-type">
+        <label class="md:text-2xl" for="select-type">Tipo</label>
+        <select name="select-type"class="w-full bg-[#1b4d96] text-[#d0e845] md:h-12 md:text-3xl md:border md:rounded-xl mt-2" id="input-select-type">
+          <option value="character">Personajes</option>
+          <option value="episode">Episodios</option>
+        </select>
+      </div>
+
+      <div class="wrapper-filters -mt-5 p-6 md:flex md:justify-around md:gap-3">
+				
+				<!--___________  STATUS ___________ -->
+				<div id="wrapper-select-status">
+					<label class="text-1xl md:text-2xl" for="select-status">Estado</label>
+					<select name="select-status" class="w-full bg-[#1b4d96] text-[#d0e845] mt-3 md:text-3xl md:border md:rounded-xl mt-2" id="select-status">
+						<option value="all">Todos</option>
+						<option value="alive">Vivo</option>
+						<option value="dead">Muerto</option>
+						<option value="unknown">Desconocido</option>
+					</select>
+				</div>
+
+				<!--___________  GENDER ___________ -->
+        <div id="wrapper-select-gender" class="mt-5">
+					<label class="text-1xl:text-2xl" for="select-gender">Género</label>
+          <select name="select-gender" class="w-full bg-[#1b4d96] text-[#d0e845] mt-3 md:text-3xl md:border md:rounded-xl md:mt-2" id="select-gender">
+						<option value="all">Todos</option>
+						<option value="female">Mujeres</option>
+						<option value="male">Hombres</option>
+						<option value="genderless">Sin Género</option>
+						<option value="unknown">Desconocido</option>
+          </select>
+				</div>
+			</div>
+
+			<div class="wrapper-button-search text-center ">
+				<button id="button-search" class="w-[40%] bg-green-500 rounded-xl border border-black text-xl p-2 lg:w-[20%] md:w-[25%] md:h-[69px] md:text-3xl" type="button">Buscar</button>
+      </div>
+
+		</section>
+
+    <!-- **************************** COMPONENT SEARCH CHARACTERS **************************** -->
+    <section id="component-search-images" class="hidden w-[90%] min-h-72 flex flex-col items-center gap-20 bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14 md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+			
+
+		</section>
+
+    <!-- ***************************** COMPONENT SEARCH EPISODE ***************************** -->
+    <section id="component-search-episodes" class="hidden w-[90%] min-h-72 flex flex-col items-center gap-20 bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14 md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+			
+	  
+		</section>
+
+		
+
+		<!-- ****************************** COMPONENT FILTER STATUS ****************************** -->
+    <section id="component-filter-status" class="hidden w-[90%] min-h-72 flex flex-col items-center gap-20 bg-[#1b2353] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14 md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+
+
+    </section>
+
+    <!-- ********************************* COMPONENT FILTER GENDER ********************************* -->
+		<section id="component-filter-gender" class="hidden w-[90%] min-h-72 flex flex-col items-center gap-20 bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14 md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+			
+
+    </section>
+		
+		<!-- ********************************* 1 COMPONENT CHARACTERS ********************************* -->
+    <section id="component-images" class=" w-full min-h-72 flex flex-col items-center gap-16 bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14 md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+		  1COMPONENT CHARACTERS
+
+    </section>
+
+		<!-- ********************************* 2 COMPONENT EPISODES ********************************* -->
+		<section id="component-episodes" class="hidden w-[90%] min-h-72 flex flex-col items-center bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14
+		md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+			2COMPONENT EPISODES
+			<!-- <div id="wrapper" class="hidden "></div> -->
+		</section>
+ 
+    <!-- ********************************* 3 COMPONENT PAGINATION ********************************* -->
+    <section id="component-pagination" class="bg-blue-500 text-center">
+			
+      <!--___________ page-number ___________ -->
+      <h1 class="text-white text-center" id="page-number"></h1>
+      
+			<!--___________ buttons/prev-next ___________ -->
+      <button id="button-prev" class=" bg-green-500 rounded-xl border border-black md:w-28 md:h-12 md:text-xl" type="button">Anterior</button>
+      <button id="button-next" class=" bg-green-500 rounded-xl border border-black md:w-28 md:h-12 md:text-xl" type="button">Siguiente</button>
+
+		</section>
+
+		<!-- ***************************** 4 COMPONENT DETAIL CHARACTER ***************************** -->
+		<section id="component-character-detail" class="hidden w-[90%] min-h-72 flex flex-col md:flex md:flex-col m-auto">
+
+			<div id="wrapper-character-detail" class="hidden"></div>
+			<div id="view-character-detail" class="hidden w-full flex flex-wrap gap-6" ></div>
+		
+			<button class ="button-back-character text-white w-[30%] h-10 m-auto mt-4 rounded-lg bg-blue-600">VOLVER</button>
+
+		</section>
+
+		<!-- ****************************** 5 COMPONENT DETAIL EPISODE ****************************** -->
+		<section id="component-episode-detail" class="hidden w-full min-h-72 flex flex-col items-center gap-16 bg-[#22861e] rounded-xl shadow-[1px_20px_16px_1px_rgb(0,0,0,0.3)] p-7 mt-10 mb-14 md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around md:w-full md:min-h-[94rem] md:flex-row md:flex-wrap md:justify-center lg:w-30 lg:gap-6 lg:justify-around">
+			
+			
+			<div id="wrapper-episode-detail"class="hiden"></div>
+			<div id="view-episode-detail" class=" w-full flex flex-wrap gap-6"></div>
+			
+			<button  class ="button-back-episode  text-white bglack
+			text-white w-[30%] h-10 m-auto mt-4 rounded-lg bg-blue-600">VOLVER</button>
+
+		</section>		
+
+	</main>
+		
+		<!-- ************************************ FOOTER *********************************** -->
+		<footer class="bg-black text-white flex flex-col items-center p-5 leading-8">
+			
+			<!-- ........SOCIAL CONTACT............ -->
+			<div class="footer-social-contact text-center">
+				<a href="https://www.linkedin.com/"><i class="social fa-brands fa-linkedin"></i></a>
+				<a href="https://github.com/"><i class="social fa-brands fa-github"></i></a>
+				<a href="https://www.facebook.com/"><i class="social fa-brands fa-square-facebook"></i></a>
+				<a href="https://discord.com/"><i class="social fa-brands fa-discord"></i></a>
+			</div>
+			
+			<!-- ........COPYRIGTH............ -->
+			<div class="footer-copyright text-center">
+				<p class="paragraph-copyrigth">Hecho con <i class="fa-solid fa-heart"></i> por Claudia Braida</p>
+				<p class="text-copyright"> Copyright © 2025 Braida</p>
+			</div>
+		</footer>
+
+		<script src="https://kit.fontawesome.com/e010b89ab9.js" crossorigin="anonymous"></script>
+		<script type="module" src="./3main.js"></script>
+
+	<script src="https://kit.fontawesome.com/e010b89ab9.js" crossorigin="anonymous"></script>
+	<script type="module" src="./3main.js"></script>
 </body>
 </html>

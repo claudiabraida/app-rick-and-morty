@@ -1,3 +1,69 @@
+
+/* 💙💙💙💙💙💙💙💙💙💙 DATA SEARCH BY NAME CHARACTER 💙💙💙💙💙💙💙💙💙💙 */
+let characterSearch = {}
+
+async function getSearchCharacters (name) {
+  try {
+    const {data} = await axios(`https://rickandmortyapi.com/api/character/?name=${name}`);
+    characterSearch = data.results
+    console.log(characterSearch);
+
+  } catch (error) {
+    console.log(error)
+    
+  };
+
+}
+
+/* 💙💙💙💙💙💙💙💙💙💙 DATA SEARCH BY NAME EPISODE 💙💙💙💙💙💙💙💙💙💙 */
+
+// let episodeSearch = {}
+
+// async function getSearchEpisode (page) {
+//   try {
+//     const {data} = await axios(`https://rickandmortyapi.com/api/episode/?page=${page}`);
+//     console.log(data)
+//     episodeSearch = data.info.pages
+    
+//     console.log(episodeSearch);
+
+//   } catch (error) {
+//     console.log(error)
+    
+//   };
+
+// }
+// getSearchEpisode(episodeSearch)
+
+
+/* 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡  FILTER STATUS 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡 */
+let filterStatus = []
+
+async function getStatusCharacters (status) {
+  try {
+   const {data} = await axios(`https://rickandmortyapi.com/api/character/?status=${status}`)
+   filterStatus = data.results
+   console.log(filterStatus)
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+/* 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡  FILTER GENDER 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡 */
+let filterGender = []
+
+async function getGenderCharacters (gender) {
+  try {
+   const {data} = await axios(`https://rickandmortyapi.com/api/character/?gender=${gender}`)
+   filterGender = data.results
+   console.log(filterGender)
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 /* ************************ MAIN DATA CHARACTERS ************************ */
 
 /* 💛💛💛💛💛💛💛💛💛💛💛💛 GET CHARACTERS 💛💛💛💛💛💛💛💛💛💛💛 */
@@ -17,6 +83,8 @@ async function getCharacters (page) {
     console.log(error)
   }
 }
+
+
 
 /* 💛💛💛💛💛💛💛💛💛💛💛💛 GET EPISODIES 💛💛💛💛💛💛💛💛💛💛💛 */
 let dataEpisode = []
@@ -39,75 +107,61 @@ async function getEpisodes (page) {
 }
 // getEpisode(dataEpisode)
 
+/* ******************* DATA DETAILS RELATIONSHIP CHARACTERS / EPISODES ******************* */
 
-/* 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡  FILTER STATUS 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡 */
-let filterStatus = []
+/* 🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍 GET CHARACTER DETAIL 🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍 */
 
-async function getStatusCharacters (status) {
+let promisesCharacters = []
+let objCharacterDetail = {}
+
+async function getCharacterDetail (id) {
+
   try {
-   const {data} = await axios(`https://rickandmortyapi.com/api/character/?status=${status}`)
-   filterStatus = data.results
-   console.log(filterStatus)
-  //  console.log("ueeueue")
-  //  console.log(dataApi)
-  //  displayData(dataApi)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-/* 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡  FILTER GENDER 🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡🧡 */
-let filterGender = []
-
-async function getGenderCharacters (gender) {
-  try {
-   const {data} = await axios(`https://rickandmortyapi.com/api/character/?gender=${gender}`)
-   filterGender = data.results
-   console.log(filterGender)
-  //  console.log("ueeueue")
-  //  console.log(dataApi)
-   //  displayData(dataApi)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-/* 💙💙💙💙💙💙💙💙💙💙 DATA SEARCH BY NAME CHARACTER 💙💙💙💙💙💙💙💙💙💙 */
-let characterSearch = {}
-
-async function getSearchCharacters (name) {
-  try {
-    const {data} = await axios(`https://rickandmortyapi.com/api/character/?name=${name}`);
-    characterSearch = data.results
-    console.log(characterSearch);
-
-  } catch (error) {
-    console.log(error)
+    const { data } = await axios(`https://rickandmortyapi.com/api/character/${id}`)
+    objCharacterDetail = data
+    const arrayPromises = data.episode.map(elem => axios(elem))
+    // console.log(arrayPromises)
+    const response = await Promise.all(arrayPromises)
+    const arraydetailEpisode = response.map(elem => elem.data)
+    promisesCharacters = response
+    arraydetailEpisode
+    console.log(promisesCharacters)
     
-  };
+    // console.log(arraydetailEpisode)
+    // console.log(objCharacterDetail)
 
+  } catch (error) {
+    console.log(error) 
+  }
 }
 
-/* 💙💙💙💙💙💙💙💙💙💙 DATA SEARCH BY NAME EPISODE 💙💙💙💙💙💙💙💙💙💙 */
 
-let episodeSearch = {}
 
-async function getSearchEpisode (page) {
+
+/* 🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍 GET EPISODE DETAIL 🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍 */
+let promisesEpisodes = []
+let objEpisodeDetail = {}
+
+async function getEpisodeDetail (id) {
+
   try {
-    const {data} = await axios(`https://rickandmortyapi.com/api/episode/?page=${page}`);
+    const { data } = await axios(`https://rickandmortyapi.com/api/episode/${id}`)
+    promisesEpisodes = data
+
+    const arrayPromises = data.characters.map(elem => axios(elem))
     console.log(data)
-    episodeSearch = data.info.pages
-    
-    console.log(episodeSearch);
+    const response = await Promise.all(arrayPromises)
+    const arraydetailEpisode = response.map(elem => elem.data)
+    promisesEpisodes = response
+    // console.log(promisesEpisodes)
+    arraydetailEpisode
+    // console.log(arraydetailEpisode)
+    // console.log(objEpisodeDetail)
 
   } catch (error) {
-    console.log(error)
-    
-  };
-
+    console.log(error) 
+  }
 }
-
 
 /* 💚💚💚💚💚💚💚💚💚💚💚  PAGINATION DATA PREV PAGE 💚💚💚💚💚💚💚💚💚 */
 async function getPrevPageData() {
@@ -144,9 +198,9 @@ async function getNextPageData() {
 }
 
 
-getSearchEpisode(episodeSearch)
-/* ******************* EXPORT DATA  ******************* */
 
+
+/* ******************* EXPORT DATA  ******************* */
 export {
   /* _______ characters data  _______ */
    dataCharacter,
@@ -178,10 +232,21 @@ export {
    characterSearch,
    getSearchCharacters,
 
+   /* _____ characters details data  _____ */
+   getCharacterDetail,
+   promisesCharacters,
+   objCharacterDetail,
+
+
+   /* _____ characters details data  _____ */
+   getEpisodeDetail,
+   promisesEpisodes,
+   objEpisodeDetail,
+
    /* ______ get search episode  _______ */
   //  episodeSearch,
   //  getSearchEpisode,
-  
+
    /* ______ get search episode  _______ */
    getPrevPageData,
    getNextPageData,
